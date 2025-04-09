@@ -2,6 +2,7 @@ package com.nisum.desafio.infrastructure.exceptions;
 
 import com.nisum.desafio.domain.exceptions.EmailExistException;
 import com.nisum.desafio.domain.exceptions.EntityNotFoundException;
+import com.nisum.desafio.domain.exceptions.PasswordSecurityException;
 import com.nisum.desafio.domain.exceptions.PhoneExistException;
 import com.nisum.desafio.infrastructure.exceptions.catalog.CatalogException;
 import com.nisum.desafio.infrastructure.exceptions.dto.ExceptionResponse;
@@ -53,6 +54,17 @@ public class GlobalExceptionAdvice {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 
+    @ExceptionHandler(PasswordSecurityException.class)
+    public ResponseEntity<ExceptionResponse> handlePasswordSecurityException(PasswordSecurityException exception) {
+        ExceptionResponse response = new ExceptionResponse(
+                ERROR,
+                LocalDateTime.now(),
+                CatalogException.VALIDATION_REQUEST.getCode(),
+                CatalogException.VALIDATION_REQUEST.getMessage(),
+                exception.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ExceptionResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
         String bodyError= Objects.requireNonNull(exception.getFieldError()).getField() + ": " + exception.getFieldError().getDefaultMessage();

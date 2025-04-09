@@ -8,6 +8,5 @@ public interface IPhoneRepository {
     Phone save(Phone phone);
     Phone findById(Long id);
     Phone findByNumberAndCityCodeId(String number, Long cityCodeId);
-    void deleteById(Long id);
     List<Phone> findByUserId(String userId);
 }

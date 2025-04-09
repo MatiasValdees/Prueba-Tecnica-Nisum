@@ -17,6 +17,8 @@ public record UserResponse(
         LocalDateTime modified,
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
         LocalDateTime last_login,
+        boolean isactive,
+        String token,
         List<PhoneResponse> phones
 ) {
 
@@ -28,6 +30,8 @@ public record UserResponse(
                 user.getCreatedAt(),
                 user.getModifiedAt(),
                 user.getLastLogin(),
+                user.isActive(),
+                user.getToken(),
                 user.getPhones()!=null?
                     user.getPhones().stream()
                         .map(PhoneResponse::fromDomain)

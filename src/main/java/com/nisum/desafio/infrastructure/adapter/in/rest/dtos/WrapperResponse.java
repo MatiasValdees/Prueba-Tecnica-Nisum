@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 public class WrapperResponse<T> {
-    private String status = "200";
+    private String status = "OK";
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime timestamp= LocalDateTime.now();

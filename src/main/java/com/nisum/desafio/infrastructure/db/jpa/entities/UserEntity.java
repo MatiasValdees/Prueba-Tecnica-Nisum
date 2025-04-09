@@ -1,5 +1,6 @@
 package com.nisum.desafio.infrastructure.db.jpa.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.nisum.desafio.domain.models.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,6 +8,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +26,7 @@ public class UserEntity {
     private UUID id;
     private String name;
     @Column(unique = true)
+    @JsonProperty("username")
     private String email;
     private String password;
     @Column(name = "created_at")
@@ -33,7 +36,8 @@ public class UserEntity {
     @Column(name = "last_login")
     private LocalDateTime lastLogin;
     private Boolean active;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.DETACH, orphanRemoval = true)
+    private String token;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.DETACH, orphanRemoval = true,fetch = FetchType.EAGER)
     private List<PhoneEntity> phones;
 
 
@@ -52,8 +56,9 @@ public class UserEntity {
                                 .stream()
                                 .map(PhoneEntity::fromDomain)
                                 .toList()
-                        :null
+                        :new ArrayList<>()
                 )
+                .token(domain.getToken())
                 .build();
     }
 
@@ -67,6 +72,7 @@ public class UserEntity {
                 .modifiedAt(this.modifiedAt)
                 .lastLogin(this.lastLogin)
                 .isActive(this.active)
+                .token(this.token)
                 .phones(this.phones!=null?
                         this.phones
                                 .stream()

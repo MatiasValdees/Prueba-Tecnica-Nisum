@@ -22,4 +22,5 @@ public class User {
     private LocalDateTime lastLogin;
     private boolean isActive;
     private List<Phone> phones;
+    private String token;
 }

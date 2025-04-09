@@ -39,12 +39,6 @@ public class PhoneRepository implements IPhoneRepository {
     }
 
     @Override
-    public void deleteById(Long id) {
-        log.info("Deleting phone by id: {} from Jpa", id);
-        jpaRepository.deleteById(id);
-    }
-
-    @Override
     public List<Phone> findByUserId(String userId) {
         log.info("Finding phones by userId: {} from Jpa", userId);
         return jpaRepository.findByUserId(userId)
