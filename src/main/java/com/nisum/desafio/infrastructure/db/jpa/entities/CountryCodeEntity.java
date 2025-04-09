@@ -1,9 +1,7 @@
 package com.nisum.desafio.infrastructure.db.jpa.entities;
 
 import com.nisum.desafio.domain.models.phone.CountryCode;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Table(name = "country_codes")
@@ -14,6 +12,8 @@ import lombok.*;
 @Setter
 @Builder
 public class CountryCodeEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
     private String name;

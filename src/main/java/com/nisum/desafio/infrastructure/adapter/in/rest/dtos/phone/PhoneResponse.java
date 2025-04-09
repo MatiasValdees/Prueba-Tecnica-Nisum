@@ -4,8 +4,8 @@ import com.nisum.desafio.domain.models.phone.Phone;
 
 public record PhoneResponse(
         String number,
-        String cityCode,
-        String countryCode
+        String citycode,
+        String countrycode
 ) {
     public static PhoneResponse fromDomain(Phone domain){
         return new PhoneResponse(

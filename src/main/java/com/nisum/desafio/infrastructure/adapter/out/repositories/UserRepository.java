@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
@@ -26,13 +27,13 @@ public class UserRepository implements IUserRepository {
     @Override
     public void deleteById(String id) {
         log.info("Deleting user with id: {} from Jpa", id);
-        jpaRepository.deleteById(id);
+        jpaRepository.deleteById(UUID.fromString(id));
     }
 
     @Override
     public User findById(String id) {
         log.info("Finding user with id: {} from Jpa", id);
-        return jpaRepository.findById(id)
+        return jpaRepository.findById(UUID.fromString(id))
                 .map(UserEntity::toDomain)
                 .orElse(null);
     }

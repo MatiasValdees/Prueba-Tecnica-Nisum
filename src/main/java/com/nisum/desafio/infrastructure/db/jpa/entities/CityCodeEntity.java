@@ -4,7 +4,10 @@ import com.nisum.desafio.domain.models.phone.CityCode;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Table(name = "city_codes")
+@Table( name = "city_codes",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"id", "country_code_id"})
+        })
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +20,7 @@ public class CityCodeEntity {
     private Long id;
     private String name;
     private String code;
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "country_code_id")
     private CountryCodeEntity countryCode;
 
@@ -26,7 +29,7 @@ public class CityCodeEntity {
                 .id(cityCode.getId())
                 .name(cityCode.getName())
                 .code(cityCode.getCode())
-                .countryCode(CountryCodeEntity.fromDomain(cityCode.getCountryCode()))
+                .countryCode(cityCode.getCountryCode()!= null ? CountryCodeEntity.fromDomain(cityCode.getCountryCode()) : null)
                 .build();
     }
     public CityCode toDomain() {
@@ -34,7 +37,7 @@ public class CityCodeEntity {
                 .id(this.id)
                 .name(this.name)
                 .code(this.code)
-                .countryCode(this.countryCode.toDomain())
+                .countryCode(this.countryCode!= null ? this.countryCode.toDomain() : null)
                 .build();
     }
 }

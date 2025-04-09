@@ -12,4 +12,5 @@ public class Phone {
     private Long id;
     private String number;
     private CityCode cityCode;
+    private String userId;
 }

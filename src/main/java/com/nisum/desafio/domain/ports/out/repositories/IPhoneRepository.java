@@ -7,7 +7,7 @@ import java.util.List;
 public interface IPhoneRepository {
     Phone save(Phone phone);
     Phone findById(Long id);
-    Phone findByPhone(Phone phone);
+    Phone findByNumberAndCityCodeId(String number, Long cityCodeId);
     void deleteById(Long id);
     List<Phone> findByUserId(String userId);
 }

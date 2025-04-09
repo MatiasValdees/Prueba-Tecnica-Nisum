@@ -20,10 +20,10 @@ public class CreatePhoneUseCase implements ICreatePhoneUseCase {
     @Override
     public Phone execute(Phone phone) {
         log.info("Creating phone: {}", phone);
-        Phone phoneExist = repository.findByPhone(phone);
+        Phone phoneExist = repository.findByNumberAndCityCodeId(phone.getNumber(),phone.getCityCode().getId());
         if (phoneExist != null) {
-            log.warn("Phone already exists: {}", phone);
-            throw new PhoneExistException(phone);
+            log.warn("Phone already exists: {}", phoneExist);
+            throw new PhoneExistException(phoneExist);
         }
         CityCode cityCode = findCityCodeUseCase.execute(phone.getCityCode().getId());
         phone.setCityCode(cityCode);

@@ -10,6 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 
 import static com.nisum.desafio.domain.models.constants.NisumConstant.CITY_CODE_CONSTANT;
 
+/**
+ * Caso de uso para encontrar un código de ciudad por su ID.
+ * Usado por caso de uso ***CREAR TELEFONO***.
+ * Usado por caso de uso ***ACTUALIZAR TELEFONO***.
+ */
 @UseCase
 @RequiredArgsConstructor
 @Slf4j

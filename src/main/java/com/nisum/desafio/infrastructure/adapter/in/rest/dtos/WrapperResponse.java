@@ -4,15 +4,21 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @JsonPropertyOrder({ "status", "timestamp", "data" })
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Setter
-@Builder
 public class WrapperResponse<T> {
-    private String status;
+    private String status = "200";
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
-    private String timestamp;
+    private LocalDateTime timestamp= LocalDateTime.now();
+
     private T data;
+
+    public WrapperResponse(T list) {
+        this.data = list;
+    }
 }

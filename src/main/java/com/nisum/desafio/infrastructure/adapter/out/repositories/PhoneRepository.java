@@ -31,9 +31,9 @@ public class PhoneRepository implements IPhoneRepository {
     }
 
     @Override
-    public Phone findByPhone(Phone phone) {
-        log.info("Finding phone by phone: {} from Jpa", phone);
-        return jpaRepository.findByPhone(phone)
+    public Phone findByNumberAndCityCodeId(String number, Long cityCodeId) {
+        log.info("Finding phone by number: {} and cityCodeId:{} from Jpa", number, cityCodeId);
+        return jpaRepository.findByNumberAndCityCodeId(number, cityCodeId)
                 .map(PhoneEntity::toDomain)
                 .orElse(null);
     }
