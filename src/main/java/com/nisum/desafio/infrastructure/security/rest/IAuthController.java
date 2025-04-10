@@ -28,7 +28,7 @@ public interface IAuthController {
                                             description = "Credenciales válidas",
                                             value = """
                                 {
-                                  "username": "usuario1",
+                                  "username": "mvaldes@nisum.com",
                                   "password": "admin"
                                 }
                                 """
